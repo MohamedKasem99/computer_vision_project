@@ -109,7 +109,7 @@ int main(int argc, char **argv)
     pcl::console::parse_argument(argc, argv, "--max_h", max_height);
 
     // PointCloudT::Ptr cloud(new PointCloudT);
-    while (!new_cloud_available_flag)
+    while (!new_cloud_available_flag && ros::ok())
     {
         ros::spinOnce();
         std::cout << "Nothing was recieved\n";
@@ -184,15 +184,17 @@ int main(int argc, char **argv)
             viewer.removeAllShapes();
             pcl::visualization::PointCloudColorHandlerRGBField<PointT> rgb(cloud);
             viewer.addPointCloud<PointT>(cloud, rgb, "input_cloud");
-            unsigned int k = 0;
+            unsigned int k = 0, uncounted;
             for (std::vector<pcl::people::PersonCluster<PointT>>::iterator it = clusters.begin(); it != clusters.end(); ++it)
             {
+                std::cout << "Confidence " << uncounted << ": " << it->getPersonConfidence() << "\n";
                 if (it->getPersonConfidence() > min_confidence) // draw only people with confidence above a threshold
                 {
                     // draw theoretical person bounding box in the PCL viewer:
                     it->drawTBoundingBox(viewer, k);
                     k++;
                 }
+                uncounted++;
             }
             std::cout << k << " people found" << std::endl;
             viewer.spinOnce();

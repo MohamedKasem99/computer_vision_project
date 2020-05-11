@@ -15,16 +15,7 @@
 
   </include>
 
-  <include file="$(find my_pcl_tutorial)/launch/spawn_sdf.launch">
-    <arg name="robot_name" value="human_male_1" />
-    <arg name="x" value="10" />
-    <arg name="y" value="3.0" />
-    <arg name="z" value="0.0" />
-    <arg name="roll" value="0"/>
-    <arg name="pitch" value="0"/>
-    <arg name="yaw" value="0.0" />
-    <arg name="sdf_robot_file" value="$(find my_pcl_tutorial)/models/human_male_1/model.sdf" />
-  </include>
+
 
   <!-- call betabot urdf description -->
   <param name="robot_description" command="$(find xacro)/xacro.py $(find betabot_description)/urdf/betabot.urdf.xacro" />
@@ -46,5 +37,15 @@
 
   <!-- ============================================= -->
   <!-- =================ExtraParam================== -->
+  <!-- <include file="$(find my_pcl_tutorial)/launch/spawn_sdf.launch">
+    <arg name="robot_name" value="human_male_1" />
+    <arg name="x" value="10" />
+    <arg name="y" value="3.0" />
+    <arg name="z" value="0.0" />
+    <arg name="roll" value="0"/>
+    <arg name="pitch" value="0"/>
+    <arg name="yaw" value="0.0" />
+    <arg name="sdf_robot_file" value="$(find my_pcl_tutorial)/models/human_male_1/model.sdf" />
+  </include> -->
 
 </launch>
